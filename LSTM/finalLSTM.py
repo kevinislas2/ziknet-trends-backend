@@ -1,7 +1,6 @@
 from pandas import read_csv, DataFrame, concat
-from sklearn.preprocessing import LabelEncoder, MinMaxScaler, RobustScaler, StandardScaler
 from keras import Sequential
-from keras.layers import LSTM, Dense, Dropout, TimeDistributed
+from keras.layers import LSTM, Dense, Dropout
 from keras.optimizers import Adam
 from keras.constraints import nonneg
 from matplotlib import pyplot
@@ -75,9 +74,7 @@ def series_to_supervised(data, n_in=1, n_out=1, dropnan=True):
 		agg.dropna(inplace=True)
 	return agg
 
-def getXY(filename):
-	global populations
-	scale = populations[filename]
+def getXY(filename, scale):
 
 	dataset = read_csv(filename, header=0, index_col=0)
 	dataset[["Searches"]] /= 100
